@@ -37,7 +37,7 @@ class UsersController {
 
     const userWithUpdateEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email]);
 
-    if(userWithUpdateEmail && userWithUpdateEmail.id !== user_id){
+    if(userWithUpdateEmail && userWithUpdateEmail.id !== user.id){
         throw new AppError("Este e-mail já em uso.");
 
     }
@@ -65,7 +65,7 @@ class UsersController {
     email = ?,
     password = ?,
     updated_at = DATETIME('now')
-    WHERE id = ? `, [user.name, user.email, user.password, user.id]); 
+    WHERE id = ? `, [user.name, user.email, user.password, user_id]); 
 
     return response.json();
 
